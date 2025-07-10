@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contrato de Prestação de Serviços - Desenvolvimento Web</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #fafafa;
+            min-height: 100vh;
+            padding: 40px 20px;
+            color: #1a1a1a;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 2px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+            overflow: hidden;
+        }
+
+        .header {
+            padding: 60px 40px 40px;
+            border-bottom: 1px solid #f0f0f0;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 8px;
+        }
+
+        .header p {
+            font-size: 1rem;
+            color: #666;
+            font-weight: 400;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .section {
+            margin-bottom: 40px;
+        }
+
+        .section:last-child {
+            margin-bottom: 0;
+        }
+
+        .section-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #f0f0f0;
+            padding-bottom: 8px;
+        }
+
+        .parties {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 32px;
+            margin-bottom: 32px;
+        }
+
+        .party {
+            border: 1px solid #e8e8e8;
+            border-radius: 2px;
+            padding: 24px;
+        }
+
+        .party-title {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 12px;
+        }
+
+        .party-info {
+            font-size: 0.9rem;
+            color: #555;
+            line-height: 1.5;
+        }
+
+        .services {
+            background: #f8f8f8;
+            padding: 24px;
+            border-radius: 2px;
+            margin-bottom: 24px;
+        }
+
+        .service-option {
+            border: 1px solid #e0e0e0;
+            border-radius: 2px;
+            padding: 20px;
+            margin-bottom: 16px;
+            background: white;
+        }
+
+        .service-option:last-child {
+            margin-bottom: 0;
+        }
+
+        .service-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 8px;
+        }
+
+        .service-price {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 12px;
+        }
+
+        .service-description {
+            font-size: 0.9rem;
+            color: #555;
+            line-height: 1.5;
+        }
+
+        .terms-list {
+            list-style: none;
+            counter-reset: term-counter;
+        }
+
+        .terms-list li {
+            margin-bottom: 20px;
+            padding-left: 40px;
+            position: relative;
+            font-size: 0.95rem;
+            color: #555;
+            line-height: 1.6;
+        }
+
+        .terms-list li::before {
+            content: counter(term-counter) ".";
+            counter-increment: term-counter;
+            position: absolute;
+            left: 0;
+            top: 0;
+            font-weight: 600;
+            color: #1a1a1a;
+        }
+
+        .terms-list li strong {
+            color: #1a1a1a;
+        }
+
+        .signature-section {
+            border-top: 1px solid #f0f0f0;
+            padding-top: 40px;
+            margin-top: 40px;
+        }
+
+        .signatures {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            margin-top: 60px;
+        }
+
+        .signature-block {
+            text-align: center;
+        }
+
+        .signature-line {
+            border-bottom: 1px solid #ccc;
+            margin-bottom: 8px;
+            height: 40px;
+        }
+
+        .signature-label {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 4px;
+        }
+
+        .signature-name {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #1a1a1a;
+        }
+
+        .highlight {
+            background: #fff3cd;
+            padding: 16px;
+            border-radius: 2px;
+            border-left: 4px solid #ffc107;
+            margin: 20px 0;
+        }
+
+        .highlight p {
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+            color: #856404;
+        }
+
+        .highlight p:last-child {
+            margin-bottom: 0;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 20px 16px;
+            }
+
+            .header {
+                padding: 40px 24px 32px;
+            }
+
+            .content {
+                padding: 32px 24px;
+            }
+
+            .parties {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .signatures {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Contrato de Prestação de Serviços</h1>
+            <p>Desenvolvimento de Site de Portfólio</p>
+        </div>
+
+        <div class="content">
+            <div class="section">
+                <div class="parties">
+                    <div class="party">
+                        <div class="party-title">CONTRATANTE</div>
+                        <div class="party-info">
+                            <strong>Nome:</strong> _______________________<br>
+                            <strong>CPF:</strong> _______________________<br>
+                            <strong>E-mail:</strong> _______________________<br>
+                            <strong>Telefone:</strong> _______________________<br>
+                            <strong>Endereço:</strong> _______________________
+                        </div>
+                    </div>
+
+                    <div class="party">
+                        <div class="party-title">CONTRATADO</div>
+                        <div class="party-info">
+                            <strong>Nome:</strong> Rodrigo R. Giuntini<br>
+                            <strong>CPF:</strong> _______________________<br>
+                            <strong>E-mail:</strong> _______________________<br>
+                            <strong>Telefone:</strong> _______________________<br>
+                            <strong>Endereço:</strong> _______________________
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">Objeto do Contrato</h2>
+                <div class="services">
+                    <p style="margin-bottom: 20px; font-size: 0.95rem; color: #555;">
+                        Selecione o serviço contratado marcando um X na opção escolhida:
+                    </p>
+                    
+                    <div class="service-option">
+                        <div style="display: flex; align-items: center; margin-bottom: 12px;">
+                            <input type="checkbox" style="margin-right: 12px; transform: scale(1.2);">
+                            <span class="service-title">Site Profissional Simples</span>
+                        </div>
+                        <div class="service-price">R$ 900,00</div>
+                        <div class="service-description">
+                            Layout limpo e profissional, cada projeto com vídeo, imagem, título e descrição. 
+                            Responsivo para todos os dispositivos. Sem painel de administração (atualizações 
+                            devem ser solicitadas ao desenvolvedor).
+                        </div>
+                    </div>
+
+                    <div class="service-option">
+                        <div style="display: flex; align-items: center; margin-bottom: 12px;">
+                            <input type="checkbox" style="margin-right: 12px; transform: scale(1.2);">
+                            <span class="service-title">Site com Painel de Login</span>
+                        </div>
+                        <div class="service-price">R$ 2.500,00</div>
+                        <div class="service-description">
+                            Inclui tudo da versão simples + painel administrativo com login e senha. 
+                            Permite ao cliente cadastrar e editar projetos de forma autônoma. 
+                            Sistema escalável para futuras funcionalidades.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">Termos e Condições</h2>
+                <ol class="terms-list">
+                    <li>
+                        <strong>Prazo de Entrega:</strong> O projeto será entregue em até 15 (quinze) dias corridos 
+                        após aprovação do layout inicial e recebimento da primeira parcela do pagamento.
+                    </li>
+                    
+                    <li>
+                        <strong>Pagamento:</strong> O valor será dividido em duas parcelas:
+                        <br>• 50% na assinatura do contrato (para início do projeto)
+                        <br>• 50% na entrega final do projeto
+                    </li>
+                    
+                    <li>
+                        <strong>Conteúdo:</strong> O contratante se compromete a fornecer todo o conteúdo 
+                        necessário (textos, imagens, vídeos) em até 3 (três) dias após solicitação.
+                    </li>
+                    
+                    <li>
+                        <strong>Revisões:</strong> Estão incluídas até 2 (duas) rodadas de revisão/ajustes. 
+                        Alterações adicionais serão cobradas à parte.
+                    </li>
+                    
+                    <li>
+                        <strong>Hospedagem:</strong> A hospedagem do site NÃO está incluída no valor. 
+                        O contratante deve providenciar domínio e hospedagem próprios.
+                    </li>
+                    
+                    <li>
+                        <strong>Garantia:</strong> O contratado oferece 30 (trinta) dias de garantia 
+                        contra bugs e falhas técnicas após a entrega.
+                    </li>
+                    
+                    <li>
+                        <strong>Propriedade:</strong> Após o pagamento integral, o código fonte 
+                        será de propriedade do contratante.
+                    </li>
+                    
+                    <li>
+                        <strong>Cancelamento:</strong> Em caso de cancelamento pelo contratante, 
+                        os valores pagos não serão devolvidos, mas o trabalho realizado será entregue.
+                    </li>
+                    
+                    <li>
+                        <strong>Atraso na Entrega:</strong> Se o atraso for causado por demora no 
+                        fornecimento de conteúdo pelo contratante, o prazo será prorrogado proporcionalmente.
+                    </li>
+                    
+                    <li>
+                        <strong>Suporte (apenas para versão com painel):</strong> Para a versão com painel 
+                        de login, está incluído suporte técnico básico por 60 (sessenta) dias após a entrega.
+                    </li>
+                </ol>
+            </div>
+
+            <div class="highlight">
+                <p><strong>Importante:</strong> Este contrato tem validade de 30 (trinta) dias após a assinatura. 
+                Se o projeto não for iniciado neste prazo, será necessário renegociar os termos.</p>
+                <p><strong>Comunicação:</strong> Toda comunicação oficial deve ser feita por e-mail para 
+                manter registro das solicitações e aprovações.</p>
+            </div>
+
+            <div class="signature-section">
+                <div class="section-title">Assinaturas</div>
+                <p style="margin-bottom: 20px; font-size: 0.9rem; color: #666;">
+                    Ao assinar este contrato, ambas as partes concordam com todos os termos descritos acima.
+                </p>
+                
+                <div style="margin-bottom: 20px; font-size: 0.9rem; color: #555;">
+                    <strong>Data:</strong> _____ / _____ / _______
+                </div>
+
+                <div class="signatures">
+                    <div class="signature-block">
+                        <div class="signature-line"></div>
+                        <div class="signature-label">Contratante</div>
+                        <div class="signature-name">Nome: _______________________</div>
+                    </div>
+
+                    <div class="signature-block">
+                        <div class="signature-line"></div>
+                        <div class="signature-label">Contratado</div>
+                        <div class="signature-name">Rodrigo R. Giuntini</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html> 
