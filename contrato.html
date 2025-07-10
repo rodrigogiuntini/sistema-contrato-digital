@@ -1,0 +1,1199 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contrato de Prestação de Serviços - Desenvolvimento Web</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #fafafa;
+            min-height: 100vh;
+            padding: 40px 20px;
+            color: #1a1a1a;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 2px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+            overflow: hidden;
+        }
+
+        .header {
+            padding: 60px 40px 40px;
+            border-bottom: 1px solid #f0f0f0;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 8px;
+        }
+
+        .header p {
+            font-size: 1rem;
+            color: #666;
+            font-weight: 400;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .section {
+            margin-bottom: 40px;
+        }
+
+        .section:last-child {
+            margin-bottom: 0;
+        }
+
+        .section-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #f0f0f0;
+            padding-bottom: 8px;
+        }
+
+        .parties {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 32px;
+            margin-bottom: 32px;
+        }
+
+        .party {
+            border: 1px solid #e8e8e8;
+            border-radius: 2px;
+            padding: 24px;
+        }
+
+        .party-title {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 12px;
+        }
+
+        .party-info {
+            font-size: 0.9rem;
+            color: #555;
+            line-height: 1.5;
+        }
+
+        .services {
+            background: #f8f8f8;
+            padding: 24px;
+            border-radius: 2px;
+            margin-bottom: 24px;
+        }
+
+        .service-option {
+            border: 1px solid #e0e0e0;
+            border-radius: 2px;
+            padding: 20px;
+            margin-bottom: 16px;
+            background: white;
+        }
+
+        .service-option:last-child {
+            margin-bottom: 0;
+        }
+
+        .service-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 8px;
+        }
+
+        .service-price {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 12px;
+        }
+
+        .service-description {
+            font-size: 0.9rem;
+            color: #555;
+            line-height: 1.5;
+        }
+
+        .terms-list {
+            list-style: none;
+            counter-reset: term-counter;
+        }
+
+        .terms-list li {
+            margin-bottom: 20px;
+            padding-left: 40px;
+            position: relative;
+            font-size: 0.95rem;
+            color: #555;
+            line-height: 1.6;
+        }
+
+        .terms-list li::before {
+            content: counter(term-counter) ".";
+            counter-increment: term-counter;
+            position: absolute;
+            left: 0;
+            top: 0;
+            font-weight: 600;
+            color: #1a1a1a;
+        }
+
+        .terms-list li strong {
+            color: #1a1a1a;
+        }
+
+        .signature-section {
+            border-top: 1px solid #f0f0f0;
+            padding-top: 40px;
+            margin-top: 40px;
+        }
+
+        .signatures {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            margin-top: 60px;
+        }
+
+        .signature-block {
+            text-align: center;
+        }
+
+        .signature-line {
+            border-bottom: 1px solid #ccc;
+            margin-bottom: 8px;
+            height: 40px;
+        }
+
+        .signature-label {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 4px;
+        }
+
+        .signature-name {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #1a1a1a;
+        }
+
+        .highlight {
+            background: #fff3cd;
+            padding: 16px;
+            border-radius: 2px;
+            border-left: 4px solid #ffc107;
+            margin: 20px 0;
+        }
+
+        .highlight p {
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+            color: #856404;
+        }
+
+        .highlight p:last-child {
+            margin-bottom: 0;
+        }
+
+        .form-input {
+            border: none;
+            border-bottom: 1px solid #ccc;
+            background: transparent;
+            padding: 4px 0;
+            font-family: inherit;
+            font-size: 0.9rem;
+            color: #1a1a1a;
+            width: 200px;
+            outline: none;
+        }
+
+        .form-input:focus {
+            border-bottom-color: #007bff;
+        }
+
+        .form-input-large {
+            width: 300px;
+        }
+
+        .form-input-date {
+            width: 60px;
+            text-align: center;
+        }
+
+        .checkbox-large {
+            transform: scale(1.5);
+            margin-right: 12px;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            margin: 32px 0;
+            padding: 32px;
+            border-top: 1px solid #f0f0f0;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 4px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .btn-primary {
+            background: #007bff;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #0056b3;
+        }
+
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+            font-size: 0.9rem;
+        }
+
+        .btn-secondary:hover {
+            background: #545b62;
+        }
+
+        .btn-success {
+            background: #28a745;
+            color: white;
+        }
+
+        .btn-success:hover {
+            background: #218838;
+        }
+
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .btn:disabled:hover {
+            background: #28a745 !important;
+        }
+
+        .print-hidden {
+            display: none;
+        }
+
+        @media print {
+            .action-buttons {
+                display: none;
+            }
+            
+            .form-input {
+                border-bottom: 1px solid #000;
+            }
+        }
+
+        /* Modal para assinatura */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.8);
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 5% auto;
+            padding: 20px;
+            border-radius: 8px;
+            width: 90%;
+            max-width: 600px;
+            position: relative;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            position: absolute;
+            right: 15px;
+            top: 10px;
+        }
+
+        .close:hover {
+            color: #000;
+        }
+
+        .signature-canvas {
+            border: 2px solid #ddd;
+            border-radius: 4px;
+            cursor: crosshair;
+            display: block;
+            margin: 20px auto;
+            background: white !important;
+            background-color: white !important;
+        }
+
+        .signature-controls {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .btn-sign {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .btn-clear {
+            background: #dc3545;
+            color: white;
+        }
+
+        .btn-clear:hover {
+            background: #c82333;
+        }
+
+        .btn-save {
+            background: #28a745;
+            color: white;
+        }
+
+        .btn-save:hover {
+            background: #218838;
+        }
+
+        .btn-cancel {
+            background: #6c757d;
+            color: white;
+        }
+
+        .btn-cancel:hover {
+            background: #545b62;
+        }
+
+        .signature-preview {
+            max-width: 150px;
+            max-height: 50px;
+            border: 1px solid #ddd;
+            border-radius: 2px;
+            margin-left: 10px;
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        .signature-btn {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 12px;
+            margin-left: 10px;
+        }
+
+        .signature-btn:hover {
+            background: #0056b3;
+        }
+
+        .signature-section-inline {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 20px 16px;
+            }
+
+            .header {
+                padding: 40px 24px 32px;
+            }
+
+            .content {
+                padding: 32px 24px;
+            }
+
+            .parties {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .signatures {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .modal-content {
+                width: 95%;
+                margin: 2% auto;
+                padding: 15px;
+            }
+
+            .signature-canvas {
+                width: 100%;
+                height: 150px;
+                max-width: 400px;
+            }
+
+            .signature-controls {
+                flex-direction: column;
+                gap: 8px;
+            }
+
+            .btn-sign {
+                width: 100%;
+                padding: 12px;
+            }
+
+            .signature-section-inline {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .signature-btn {
+                width: 100%;
+                margin-left: 0;
+                margin-top: 8px;
+            }
+
+            .action-buttons {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            .btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Contrato de Prestação de Serviços</h1>
+            <p>Desenvolvimento de Site de Portfólio</p>
+        </div>
+
+        <div class="content">
+            <div class="section">
+                <div class="parties">
+                    <div class="party">
+                        <div class="party-title">CONTRATANTE</div>
+                        <div class="party-info">
+                            <strong>Nome:</strong> <input type="text" class="form-input form-input-large" id="clienteNome" placeholder="Nome completo"><br>
+                            <strong>CPF:</strong> <input type="text" class="form-input" id="clienteCpf" placeholder="000.000.000-00"><br>
+                            <strong>E-mail:</strong> <input type="email" class="form-input form-input-large" id="clienteEmail" placeholder="email@exemplo.com"><br>
+                            <strong>Telefone:</strong> <input type="text" class="form-input" id="clienteTelefone" placeholder="(00) 00000-0000"><br>
+                            <strong>Endereço:</strong> <input type="text" class="form-input form-input-large" id="clienteEndereco" placeholder="Rua, número, bairro, cidade">
+                        </div>
+                    </div>
+
+                    <div class="party">
+                        <div class="party-title">CONTRATADO</div>
+                        <div class="party-info">
+                            <strong>Nome:</strong> <span id="prestadorNome">Rodrigo Rocha Giuntini</span><br>
+                            <strong>CPF:</strong> <span id="prestadorCpf">491.248.858-51</span><br>
+                            <strong>E-mail:</strong> <span id="prestadorEmail">rodrigorochagiuntini@bityx.app</span><br>
+                            <strong>Telefone:</strong> <span id="prestadorTelefone">(11) 99144-9842</span><br>
+                            <strong>Endereço:</strong> <span id="prestadorEndereco">Rua Indiana, 217 - ap 62, Brooklin - São Paulo</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">Objeto do Contrato</h2>
+                <div class="services">
+                    <p style="margin-bottom: 20px; font-size: 0.95rem; color: #555;">
+                        Selecione o serviço contratado marcando um X na opção escolhida:
+                    </p>
+                    
+                    <div class="service-option">
+                        <div style="display: flex; align-items: center; margin-bottom: 12px;">
+                            <input type="checkbox" class="checkbox-large" id="servicoSimples" name="servico" value="simples">
+                            <label for="servicoSimples" class="service-title">Site Profissional Simples</label>
+                        </div>
+                        <div class="service-price">R$ 900,00</div>
+                        <div class="service-description">
+                            Layout limpo e profissional, cada projeto com vídeo, imagem, título e descrição. 
+                            Responsivo para todos os dispositivos. Sem painel de administração.
+                        </div>
+                    </div>
+
+                    <div class="service-option">
+                        <div style="display: flex; align-items: center; margin-bottom: 12px;">
+                            <input type="checkbox" class="checkbox-large" id="servicoCompleto" name="servico" value="completo">
+                            <label for="servicoCompleto" class="service-title">Site com Painel de Login</label>
+                        </div>
+                        <div class="service-price">R$ 2.500,00</div>
+                        <div class="service-description">
+                            Inclui tudo da versão simples + painel administrativo com login e senha. 
+                            Permite ao cliente cadastrar e editar projetos de forma autônoma. 
+                            Sistema escalável para futuras funcionalidades.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">Termos e Condições</h2>
+                <ol class="terms-list">
+                    <li>
+                        <strong>Prazo de Entrega:</strong> O projeto será entregue em até 15 (quinze) dias corridos 
+                        após aprovação do layout inicial e recebimento da primeira parcela do pagamento.
+                    </li>
+                    
+                    <li>
+                        <strong>Pagamento:</strong> O valor será dividido em duas parcelas:
+                        <br>• 50% na assinatura do contrato (para início do projeto)
+                        <br>• 50% na entrega final do projeto
+                    </li>
+                    
+                    <li>
+                        <strong>Conteúdo:</strong> O contratante se compromete a fornecer todo o conteúdo 
+                        necessário (textos, imagens, vídeos) em até 3 (três) dias após solicitação.
+                    </li>
+                    
+                    <li>
+                        <strong>Revisões:</strong> Estão incluídas até 2 (duas) rodadas de revisão/ajustes. 
+                        Alterações adicionais serão cobradas à parte.
+                    </li>
+                    
+                    <li>
+                        <strong>Hospedagem:</strong> A hospedagem do site NÃO está incluída no valor. 
+                        O contratante deve providenciar domínio e hospedagem próprios.
+                    </li>
+                    
+                    <li>
+                        <strong>Garantia:</strong> O contratado oferece 30 (trinta) dias de garantia 
+                        contra bugs e falhas técnicas após a entrega.
+                    </li>
+                    
+                    <li>
+                        <strong>Propriedade:</strong> Após o pagamento integral, o código fonte 
+                        será de propriedade do contratante.
+                    </li>
+                    
+                    <li>
+                        <strong>Cancelamento:</strong> Em caso de cancelamento pelo contratante, 
+                        os valores pagos não serão devolvidos, mas o trabalho realizado será entregue.
+                    </li>
+                    
+                    <li>
+                        <strong>Atraso na Entrega:</strong> Se o atraso for causado por demora no 
+                        fornecimento de conteúdo pelo contratante, o prazo será prorrogado proporcionalmente.
+                    </li>
+                    
+                    <li>
+                        <strong>Suporte (apenas para versão com painel):</strong> Para a versão com painel 
+                        de login, está incluído suporte técnico básico por 60 (sessenta) dias após a entrega.
+                    </li>
+                </ol>
+            </div>
+
+            <div class="highlight">
+                <p><strong>Importante:</strong> Este contrato tem validade de 30 (trinta) dias após a assinatura. 
+                Se o projeto não for iniciado neste prazo, será necessário renegociar os termos.</p>
+                <p><strong>Comunicação:</strong> Toda comunicação oficial pode ser feita por WhatsApp, 
+                mantendo registro das solicitações e aprovações através das mensagens.</p>
+            </div>
+
+            <div class="signature-section">
+                <div class="section-title">Assinaturas</div>
+                <p style="margin-bottom: 20px; font-size: 0.9rem; color: #666;">
+                    Ao assinar este contrato, ambas as partes concordam com todos os termos descritos acima.
+                </p>
+                
+                <div style="margin-bottom: 20px; font-size: 0.9rem; color: #555;">
+                    <strong>Data:</strong> 
+                    <input type="text" class="form-input form-input-date" id="dia" placeholder="DD"> / 
+                    <input type="text" class="form-input form-input-date" id="mes" placeholder="MM"> / 
+                    <input type="text" class="form-input form-input-date" id="ano" placeholder="AAAA">
+                </div>
+
+                <div class="signatures">
+                    <div class="signature-block">
+                        <div class="signature-line" id="assinaturaClienteDiv"></div>
+                        <div class="signature-label">Contratante</div>
+                        <div class="signature-name" id="nomeClienteAssinatura">Nome completo</div>
+                        <div class="signature-section-inline">
+                            <button type="button" class="signature-btn" onclick="abrirModalAssinatura('cliente')">
+                                ✍️ Assinar Digitalmente
+                            </button>
+                            <button type="button" class="signature-btn" onclick="limparAssinatura('cliente')" style="background: #dc3545;">
+                                🗑️ Limpar
+                            </button>
+                        </div>
+                        <div id="validacaoCliente" style="margin-top: 8px; font-size: 0.8rem; color: #28a745; font-style: italic; text-align: center; display: none;">
+                            ✓ Assinatura Digital Validada
+                        </div>
+                    </div>
+
+                    <div class="signature-block">
+                        <div class="signature-line" id="assinaturaPrestadorDiv"></div>
+                        <div class="signature-label">Contratado</div>
+                        <div class="signature-name">Rodrigo Rocha Giuntini</div>
+                        <div style="margin-top: 8px; font-size: 0.8rem; color: #28a745; font-style: italic; text-align: center;">
+                            ✓ Assinatura Digital Validada
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="action-buttons">
+                <button type="button" class="btn btn-success" onclick="assinarContrato()">
+                    ✍️ Assinar Contrato
+                </button>
+            </div>
+            
+            <div style="text-align: center; margin-top: 10px;">
+                <small style="color: #666;">
+                    💡 <strong>Problema com emails?</strong> 
+                    <a href="javascript:verificarTemplate()" style="color: #007bff;">Diagnóstico</a> | 
+                    <a href="javascript:testarEmailCliente()" style="color: #007bff;">Teste Email</a>
+                </small>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para Assinatura Digital -->
+    <div id="modalAssinatura" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="fecharModalAssinatura()">&times;</span>
+            <h3 style="text-align: center; margin-bottom: 20px;">Assinatura Digital</h3>
+            <p style="text-align: center; color: #666; margin-bottom: 20px;">
+                Assine no espaço abaixo usando o mouse ou toque
+            </p>
+            <canvas id="canvasAssinatura" class="signature-canvas" width="500" height="200"></canvas>
+            <div class="signature-controls">
+                <button class="btn-sign btn-clear" onclick="limparCanvas()">Limpar</button>
+                <button class="btn-sign btn-save" onclick="salvarAssinatura()">Salvar Assinatura</button>
+                <button class="btn-sign btn-cancel" onclick="fecharModalAssinatura()">Cancelar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- EmailJS v4 -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script>
+        // Inicializar EmailJS v4
+        (function() {
+            emailjs.init({
+                publicKey: "E1K5MJNe_E2Dk5n7o",
+            });
+        })();
+
+        // Assinar contrato
+        function assinarContrato() {
+            // Validar campos obrigatórios (apenas do cliente)
+            const camposObrigatorios = [
+                'clienteNome', 'clienteCpf', 'clienteEmail', 'clienteTelefone', 'clienteEndereco',
+                'dia', 'mes', 'ano'
+            ];
+
+            for (let campo of camposObrigatorios) {
+                if (!document.getElementById(campo).value) {
+                    alert(`Por favor, preencha o campo: ${campo.replace(/([A-Z])/g, ' $1').toLowerCase()}`);
+                    return;
+                }
+            }
+
+            // Verificar se um serviço foi selecionado
+            const servicoSimples = document.getElementById('servicoSimples').checked;
+            const servicoCompleto = document.getElementById('servicoCompleto').checked;
+            
+            if (!servicoSimples && !servicoCompleto) {
+                alert('Por favor, selecione um serviço.');
+                return;
+            }
+
+            // Verificar se há assinatura do cliente
+            if (!assinaturaSalva.cliente) {
+                alert('Por favor, faça a assinatura digital do contratante.');
+                return;
+            }
+
+            // Verificar se há assinatura do prestador
+            if (!assinaturaSalva.prestador) {
+                alert('Por favor, faça a assinatura digital do contratado.');
+                return;
+            }
+
+            // Coletar todos os dados do contrato
+            const contratoData = {
+                cliente: {
+                    nome: document.getElementById('clienteNome').value,
+                    cpf: document.getElementById('clienteCpf').value,
+                    email: document.getElementById('clienteEmail').value,
+                    telefone: document.getElementById('clienteTelefone').value,
+                    endereco: document.getElementById('clienteEndereco').value
+                },
+                prestador: {
+                    nome: document.getElementById('prestadorNome').textContent,
+                    cpf: document.getElementById('prestadorCpf').textContent,
+                    email: document.getElementById('prestadorEmail').textContent,
+                    telefone: document.getElementById('prestadorTelefone').textContent,
+                    endereco: document.getElementById('prestadorEndereco').textContent
+                },
+                data: {
+                    dia: document.getElementById('dia').value,
+                    mes: document.getElementById('mes').value,
+                    ano: document.getElementById('ano').value
+                },
+                servico: servicoSimples ? 'simples' : 'completo',
+                assinaturas: {
+                    cliente: assinaturaSalva.cliente,
+                    prestador: assinaturaSalva.prestador
+                }
+            };
+
+            // Salvar no localStorage
+            localStorage.setItem('contratoAssinado', JSON.stringify(contratoData));
+            
+            // Mostrar loading
+            const btnAssinar = document.querySelector('.btn-success');
+            const textoOriginal = btnAssinar.innerHTML;
+            btnAssinar.innerHTML = '📧 Enviando emails...';
+            btnAssinar.disabled = true;
+            
+            // Enviar email com os dados do contrato
+            enviarEmailContrato(contratoData);
+            
+            // Restaurar botão após alguns segundos
+            setTimeout(function() {
+                btnAssinar.innerHTML = textoOriginal;
+                btnAssinar.disabled = false;
+            }, 8000);
+            
+            // Mostrar notificação de sucesso
+            alert('✅ Contrato assinado com sucesso!\n\n📧 Emails com CONTRATO COMPLETO sendo enviados para:\n• Você: rodrigorochagiuntini@bityx.app\n• Cliente: ' + contratoData.cliente.email + '\n\n📄 O contrato completo formatado será incluído em ambos os emails.\n\nRedirecionando para visualização...');
+            
+            // Redirecionar para página de visualização após delay
+            setTimeout(function() {
+                window.location.href = 'contrato-visualizacao.html';
+            }, 3000);
+        }
+
+        // Controlar seleção de serviços (apenas um pode ser selecionado)
+        document.getElementById('servicoSimples').addEventListener('change', function() {
+            if (this.checked) {
+                document.getElementById('servicoCompleto').checked = false;
+            }
+        });
+
+        document.getElementById('servicoCompleto').addEventListener('change', function() {
+            if (this.checked) {
+                document.getElementById('servicoSimples').checked = false;
+            }
+        });
+
+        // Função para enviar email do contrato
+        function enviarEmailContrato(contratoData) {
+            // Verificar se EmailJS está carregado
+            if (typeof emailjs === 'undefined') {
+                alert('❌ ERRO: EmailJS não foi carregado. Verifique sua conexão com a internet.');
+                return;
+            }
+
+            // Verificar se as assinaturas estão presentes
+            if (!contratoData.assinaturas.cliente || !contratoData.assinaturas.prestador) {
+                alert('❌ ERRO: Assinaturas digitais não encontradas.');
+                return;
+            }
+
+            // Validar email do cliente
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(contratoData.cliente.email)) {
+                alert('❌ ERRO: Email do cliente inválido (' + contratoData.cliente.email + ').\n\nPor favor, verifique o email digitado.');
+                return;
+            }
+
+            // Preparar dados do email
+            const servicoNome = contratoData.servico === 'simples' ? 'Site Profissional Simples' : 'Site com Painel de Login';
+            const servicoPreco = contratoData.servico === 'simples' ? 'R$ 900,00' : 'R$ 2.500,00';
+            
+            // Email para o prestador (Rodrigo)
+            const templateParamsPrestador = {
+                to_email: 'rodrigorochagiuntini@bityx.app',
+                subject: 'Novo Contrato Assinado - ' + contratoData.cliente.nome,
+                cliente_nome: contratoData.cliente.nome,
+                cliente_cpf: contratoData.cliente.cpf,
+                cliente_email: contratoData.cliente.email,
+                cliente_telefone: contratoData.cliente.telefone,
+                cliente_endereco: contratoData.cliente.endereco,
+                servico_nome: servicoNome,
+                servico_preco: servicoPreco,
+                data_contrato: contratoData.data.dia + '/' + contratoData.data.mes + '/' + contratoData.data.ano,
+                assinatura_cliente: contratoData.assinaturas.cliente,
+                assinatura_prestador: contratoData.assinaturas.prestador,
+                message: servicoNome === 'Site Profissional Simples' ? 
+                    'Layout limpo e profissional, cada projeto com vídeo, imagem, título e descrição. Responsivo para todos os dispositivos.' :
+                    'Inclui tudo da versão simples + painel administrativo com login e senha. Permite ao cliente cadastrar e editar projetos de forma autônoma.'
+            };
+
+            // Email para o cliente
+            const templateParamsCliente = {
+                to_email: contratoData.cliente.email,
+                subject: 'Confirmação de Contrato - ' + servicoNome,
+                cliente_nome: contratoData.cliente.nome,
+                cliente_cpf: contratoData.cliente.cpf,
+                cliente_email: contratoData.cliente.email,
+                cliente_telefone: contratoData.cliente.telefone,
+                cliente_endereco: contratoData.cliente.endereco,
+                servico_nome: servicoNome,
+                servico_preco: servicoPreco,
+                data_contrato: contratoData.data.dia + '/' + contratoData.data.mes + '/' + contratoData.data.ano,
+                assinatura_cliente: contratoData.assinaturas.cliente,
+                assinatura_prestador: contratoData.assinaturas.prestador,
+                message: servicoNome === 'Site Profissional Simples' ? 
+                    'Layout limpo e profissional, cada projeto com vídeo, imagem, título e descrição. Responsivo para todos os dispositivos.' :
+                    'Inclui tudo da versão simples + painel administrativo com login e senha. Permite ao cliente cadastrar e editar projetos de forma autônoma.'
+            };
+
+            // Enviar email para o prestador (Rodrigo) primeiro
+            emailjs.send('service_bj6c6km', 'template_i076npw', templateParamsPrestador)
+                .then(function(response) {
+                    console.log('✅ Email prestador enviado:', response);
+                    
+                    // Aguardar 2 segundos antes de enviar para o cliente
+                    setTimeout(function() {
+                        emailjs.send('service_bj6c6km', 'template_i076npw', templateParamsCliente)
+                            .then(function(response) {
+                                console.log('✅ Email cliente enviado:', response);
+                                alert('✅ SUCESSO!\n\nEmails enviados para:\n• ✅ Prestador (você)\n• ✅ Cliente (' + contratoData.cliente.email + ')\n\nVerifique suas caixas de entrada.');
+                            })
+                            .catch(function(error) {
+                                console.error('❌ Erro email cliente:', error);
+                                alert('⚠️ Email para prestador enviado com sucesso!\n\nPorém, houve problema no envio para o cliente.\n\nEmail do cliente: ' + contratoData.cliente.email + '\nVerifique se está correto.');
+                            });
+                    }, 2000);
+                })
+                .catch(function(error) {
+                    console.error('❌ Erro email prestador:', error);
+                    alert('❌ ERRO no envio de emails.\n\nVerifique sua conexão com a internet e tente novamente.');
+                });
+        }
+
+
+
+        // Carregar funcionalidades ao inicializar a página
+        window.addEventListener('load', function() {
+            // Verificar se EmailJS foi carregado
+            setTimeout(function() {
+                if (typeof emailjs !== 'undefined') {
+                    console.log('✅ EmailJS carregado com sucesso');
+                } else {
+                    console.error('❌ EmailJS NÃO foi carregado!');
+                    alert('⚠️ AVISO: Sistema de email pode não funcionar.\nVerifique sua conexão com a internet.');
+                }
+            }, 1000);
+
+            // Preencher data atual automaticamente
+            const hoje = new Date();
+            document.getElementById('dia').value = String(hoje.getDate()).padStart(2, '0');
+            document.getElementById('mes').value = String(hoje.getMonth() + 1).padStart(2, '0');
+            document.getElementById('ano').value = hoje.getFullYear();
+            
+            // Preencher nome na assinatura automaticamente quando nome do cliente for digitado
+            document.getElementById('clienteNome').addEventListener('input', function() {
+                const nome = this.value || 'Nome completo';
+                document.getElementById('nomeClienteAssinatura').textContent = nome;
+            });
+
+            // Carregar assinatura pré-definida do prestador
+            carregarAssinaturaPrestador();
+            
+            // Aplicar formatação aos campos
+            document.getElementById('clienteCpf').addEventListener('input', function() {
+                formatarCPF(this);
+            });
+
+            document.getElementById('clienteTelefone').addEventListener('input', function() {
+                formatarTelefone(this);
+            });
+        });
+
+        // Formatação automática de CPF
+        function formatarCPF(input) {
+            let value = input.value.replace(/\D/g, '');
+            value = value.replace(/(\d{3})(\d)/, '$1.$2');
+            value = value.replace(/(\d{3})(\d)/, '$1.$2');
+            value = value.replace(/(\d{3})(\d{1,2})$/, '$1-$2');
+            input.value = value;
+        }
+
+        // Formatação automática de telefone
+        function formatarTelefone(input) {
+            let value = input.value.replace(/\D/g, '');
+            value = value.replace(/(\d{2})(\d)/, '($1) $2');
+            value = value.replace(/(\d{5})(\d)/, '$1-$2');
+            input.value = value;
+        }
+
+        // Carregar assinatura pré-definida do prestador
+        function carregarAssinaturaPrestador() {
+            // Criar canvas temporário para gerar a assinatura
+            const tempCanvas = document.createElement('canvas');
+            tempCanvas.width = 500;
+            tempCanvas.height = 200;
+            const tempCtx = tempCanvas.getContext('2d');
+            
+            // Definir fundo branco
+            tempCtx.fillStyle = '#ffffff';
+            tempCtx.fillRect(0, 0, tempCanvas.width, tempCanvas.height);
+            
+            // Configurar o estilo da assinatura
+            tempCtx.fillStyle = '#000';
+            tempCtx.font = 'italic 32px "Times New Roman", "Georgia", serif';
+            tempCtx.textAlign = 'center';
+            tempCtx.textBaseline = 'middle';
+            
+            // Desenhar a assinatura com estilo manuscrito
+            tempCtx.save();
+            tempCtx.scale(1.1, 0.9); // Alongar ligeiramente
+            tempCtx.fillText('Rodrigo Rocha Giuntini', 225, 111);
+            tempCtx.restore();
+            
+            // Adicionar uma linha decorativa sutil
+            tempCtx.strokeStyle = '#333';
+            tempCtx.lineWidth = 1.5;
+            tempCtx.beginPath();
+            tempCtx.moveTo(80, 135);
+            tempCtx.lineTo(420, 135);
+            tempCtx.stroke();
+            
+            // Converter para dataURL PNG (fundo branco)
+            const assinaturaDataURL = tempCanvas.toDataURL('image/png');
+            
+            // Salvar a assinatura do prestador
+            assinaturaSalva.prestador = assinaturaDataURL;
+            
+            // Criar elemento img e inserir na linha de assinatura
+            const img = document.createElement('img');
+            img.src = assinaturaDataURL;
+            img.className = 'signature-preview';
+            img.style.maxWidth = '200px';
+            img.style.maxHeight = '60px';
+            img.style.border = 'none';
+            img.style.background = 'white';
+            
+            const divAssinatura = document.getElementById('assinaturaPrestadorDiv');
+            divAssinatura.innerHTML = '';
+            divAssinatura.appendChild(img);
+        }
+
+        // ===== FUNCIONALIDADES DE ASSINATURA DIGITAL =====
+
+        let canvas, ctx;
+        let isDrawing = false;
+        let tipoAssinatura = '';
+        let assinaturaSalva = {
+            cliente: null,
+            prestador: null
+        };
+
+        // Abrir modal de assinatura (apenas para cliente)
+        function abrirModalAssinatura(tipo) {
+            if (tipo === 'prestador') {
+                alert('A assinatura do contratado já está validada e não pode ser alterada.');
+                return;
+            }
+            
+            tipoAssinatura = tipo;
+            document.getElementById('modalAssinatura').style.display = 'block';
+            
+            // Configurar canvas
+            canvas = document.getElementById('canvasAssinatura');
+            ctx = canvas.getContext('2d');
+            
+            // Limpar canvas com fundo branco
+            ctx.fillStyle = '#ffffff';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            // Configurar estilo do desenho
+            ctx.strokeStyle = '#000';
+            ctx.lineWidth = 2;
+            ctx.lineCap = 'round';
+            ctx.lineJoin = 'round';
+            
+            // Eventos do mouse
+            canvas.addEventListener('mousedown', iniciarDesenho);
+            canvas.addEventListener('mousemove', desenhar);
+            canvas.addEventListener('mouseup', pararDesenho);
+            canvas.addEventListener('mouseout', pararDesenho);
+            
+            // Eventos touch para dispositivos móveis
+            canvas.addEventListener('touchstart', iniciarDesenhoTouch);
+            canvas.addEventListener('touchmove', desenharTouch);
+            canvas.addEventListener('touchend', pararDesenho);
+        }
+
+        // Fechar modal
+        function fecharModalAssinatura() {
+            document.getElementById('modalAssinatura').style.display = 'none';
+            tipoAssinatura = '';
+        }
+
+        // Limpar canvas
+        function limparCanvas() {
+            // Limpar com fundo branco
+            ctx.fillStyle = '#ffffff';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            // Restaurar cor do desenho
+            ctx.strokeStyle = '#000';
+        }
+
+        // Limpar assinatura salva (apenas para cliente)
+        function limparAssinatura(tipo) {
+            if (tipo === 'cliente') {
+                assinaturaSalva[tipo] = null;
+                document.getElementById(`assinatura${tipo.charAt(0).toUpperCase() + tipo.slice(1)}Div`).innerHTML = '';
+                // Esconder mensagem de validação
+                document.getElementById('validacaoCliente').style.display = 'none';
+            }
+        }
+
+        // Salvar assinatura
+        function salvarAssinatura() {
+            // Verificar se há algo desenhado (além do fundo branco)
+            const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+            let hasDrawing = false;
+            
+            // Verificar se há pixels diferentes de branco
+            for (let i = 0; i < imageData.data.length; i += 4) {
+                const r = imageData.data[i];
+                const g = imageData.data[i + 1];
+                const b = imageData.data[i + 2];
+                const a = imageData.data[i + 3];
+                
+                // Se não é branco (255,255,255) ou transparente
+                if (a > 0 && (r !== 255 || g !== 255 || b !== 255)) {
+                    hasDrawing = true;
+                    break;
+                }
+            }
+            
+            if (!hasDrawing) {
+                alert('Por favor, faça uma assinatura antes de salvar.');
+                return;
+            }
+            
+            // Salvar como imagem PNG (preserva fundo branco)
+            const dataURL = canvas.toDataURL('image/png');
+            assinaturaSalva[tipoAssinatura] = dataURL;
+            
+            // Criar elemento img e inserir na linha de assinatura
+            const img = document.createElement('img');
+            img.src = dataURL;
+            img.className = 'signature-preview';
+            img.style.maxWidth = '200px';
+            img.style.maxHeight = '60px';
+            img.style.border = 'none';
+            img.style.background = 'white';
+            
+            const divAssinatura = document.getElementById(`assinatura${tipoAssinatura.charAt(0).toUpperCase() + tipoAssinatura.slice(1)}Div`);
+            divAssinatura.innerHTML = '';
+            divAssinatura.appendChild(img);
+            
+            // Mostrar mensagem de validação para o cliente
+            if (tipoAssinatura === 'cliente') {
+                document.getElementById('validacaoCliente').style.display = 'block';
+            }
+            
+            // Fechar modal
+            fecharModalAssinatura();
+            
+            alert('✅ Assinatura salva com sucesso!');
+        }
+
+        // Funções de desenho com mouse
+        function iniciarDesenho(e) {
+            isDrawing = true;
+            const rect = canvas.getBoundingClientRect();
+            ctx.beginPath();
+            ctx.moveTo(e.clientX - rect.left, e.clientY - rect.top);
+        }
+
+        function desenhar(e) {
+            if (!isDrawing) return;
+            const rect = canvas.getBoundingClientRect();
+            ctx.lineTo(e.clientX - rect.left, e.clientY - rect.top);
+            ctx.stroke();
+        }
+
+        function pararDesenho() {
+            isDrawing = false;
+            ctx.beginPath();
+        }
+
+        // Funções de desenho com touch
+        function iniciarDesenhoTouch(e) {
+            e.preventDefault();
+            isDrawing = true;
+            const rect = canvas.getBoundingClientRect();
+            const touch = e.touches[0];
+            ctx.beginPath();
+            ctx.moveTo(touch.clientX - rect.left, touch.clientY - rect.top);
+        }
+
+        function desenharTouch(e) {
+            if (!isDrawing) return;
+            e.preventDefault();
+            const rect = canvas.getBoundingClientRect();
+            const touch = e.touches[0];
+            ctx.lineTo(touch.clientX - rect.left, touch.clientY - rect.top);
+            ctx.stroke();
+        }
+
+                // Fechar modal ao clicar fora
+        window.onclick = function(event) {
+            const modal = document.getElementById('modalAssinatura');
+            if (event.target === modal) {
+                fecharModalAssinatura();
+            }
+        }
+
+
+
+    </script>
+</body>
+</html> 

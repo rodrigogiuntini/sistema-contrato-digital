@@ -1,0 +1,1014 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contrato de Prestação de Serviços - Visualização Final</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #fafafa;
+            min-height: 100vh;
+            padding: 40px 20px;
+            color: #1a1a1a;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 2px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+            overflow: hidden;
+        }
+
+        .header {
+            padding: 60px 40px 40px;
+            border-bottom: 1px solid #f0f0f0;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 8px;
+        }
+
+        .header p {
+            font-size: 1rem;
+            color: #666;
+            font-weight: 400;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .section {
+            margin-bottom: 40px;
+        }
+
+        .section:last-child {
+            margin-bottom: 0;
+        }
+
+        .section-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #f0f0f0;
+            padding-bottom: 8px;
+        }
+
+        .parties {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 32px;
+            margin-bottom: 32px;
+        }
+
+        .party {
+            border: 1px solid #e8e8e8;
+            border-radius: 2px;
+            padding: 24px;
+        }
+
+        .party-title {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 12px;
+        }
+
+        .party-info {
+            font-size: 0.9rem;
+            color: #555;
+            line-height: 1.8;
+        }
+
+        .party-info strong {
+            color: #1a1a1a;
+        }
+
+        .services {
+            background: #f8f8f8;
+            padding: 24px;
+            border-radius: 2px;
+            margin-bottom: 24px;
+        }
+
+        .service-selected {
+            border: 2px solid #007bff;
+            border-radius: 2px;
+            padding: 20px;
+            background: white;
+            position: relative;
+        }
+
+        .service-selected::before {
+            content: "✓ SERVIÇO CONTRATADO";
+            position: absolute;
+            top: -10px;
+            left: 20px;
+            background: #007bff;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 2px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .service-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 8px;
+        }
+
+        .service-price {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #007bff;
+            margin-bottom: 12px;
+        }
+
+        .service-description {
+            font-size: 0.9rem;
+            color: #555;
+            line-height: 1.5;
+        }
+
+        .terms-list {
+            list-style: none;
+            counter-reset: term-counter;
+        }
+
+        .terms-list li {
+            margin-bottom: 20px;
+            padding-left: 40px;
+            position: relative;
+            font-size: 0.95rem;
+            color: #555;
+            line-height: 1.6;
+        }
+
+        .terms-list li::before {
+            content: counter(term-counter) ".";
+            counter-increment: term-counter;
+            position: absolute;
+            left: 0;
+            top: 0;
+            font-weight: 600;
+            color: #1a1a1a;
+        }
+
+        .terms-list li strong {
+            color: #1a1a1a;
+        }
+
+        .signature-section {
+            border-top: 1px solid #f0f0f0;
+            padding-top: 40px;
+            margin-top: 40px;
+        }
+
+        .signatures {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            margin-top: 60px;
+        }
+
+        .signature-block {
+            text-align: center;
+        }
+
+        .signature-line {
+            border-bottom: 2px solid #000;
+            margin-bottom: 8px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #fafafa;
+        }
+
+        .signature-image {
+            max-width: 200px;
+            max-height: 70px;
+            border: none;
+            display: block;
+            margin: 0 auto;
+        }
+
+        .signature-placeholder {
+            font-style: italic;
+            color: #999;
+            font-size: 0.9rem;
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        .signature-info {
+            background: #e8f5e8;
+            border: 1px solid #28a745;
+            border-radius: 4px;
+            padding: 8px 12px;
+            margin-top: 10px;
+            text-align: center;
+        }
+
+        .signature-info span {
+            font-size: 0.8rem;
+            color: #155724;
+            font-weight: 500;
+        }
+
+        .signature-label {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 4px;
+        }
+
+        .signature-name {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #1a1a1a;
+        }
+
+        .highlight {
+            background: #fff3cd;
+            padding: 16px;
+            border-radius: 2px;
+            border-left: 4px solid #ffc107;
+            margin: 20px 0;
+        }
+
+        .highlight p {
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+            color: #856404;
+        }
+
+        .highlight p:last-child {
+            margin-bottom: 0;
+        }
+
+        .contract-status {
+            background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
+            border: 2px solid #28a745;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 32px;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(40, 167, 69, 0.15);
+        }
+
+        .contract-status h3 {
+            color: #155724;
+            margin-bottom: 8px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .contract-status p {
+            color: #155724;
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            margin: 32px 0;
+            padding: 32px;
+            border-top: 1px solid #f0f0f0;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 4px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: #007bff;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #0056b3;
+        }
+
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: #545b62;
+        }
+
+        .btn-success {
+            background: #28a745;
+            color: white;
+        }
+
+        .btn-success:hover {
+            background: #218838;
+        }
+
+        @media print {
+            .action-buttons {
+                display: none !important;
+            }
+            
+            body {
+                background: white !important;
+                padding: 0 !important;
+                margin: 0 !important;
+                font-size: 12pt !important;
+                line-height: 1.4 !important;
+                color: #000 !important;
+            }
+
+            .container {
+                box-shadow: none !important;
+                border-radius: 0 !important;
+                max-width: 100% !important;
+                margin: 0 !important;
+                padding: 0 !important;
+            }
+
+            .header {
+                padding: 20pt 30pt 15pt !important;
+                border-bottom: 1pt solid #000 !important;
+                page-break-inside: avoid;
+            }
+
+            .header h1 {
+                font-size: 18pt !important;
+                margin-bottom: 5pt !important;
+            }
+
+            .header p {
+                font-size: 12pt !important;
+            }
+
+            .content {
+                padding: 20pt 30pt !important;
+            }
+
+            .contract-status {
+                background: #f0f0f0 !important;
+                border: 1pt solid #000 !important;
+                margin-bottom: 20pt !important;
+                padding: 10pt !important;
+                page-break-inside: avoid;
+            }
+
+            .contract-status h3 {
+                color: #000 !important;
+                font-size: 14pt !important;
+            }
+
+            .contract-status p {
+                color: #000 !important;
+                font-size: 11pt !important;
+            }
+
+            .section {
+                margin-bottom: 25pt !important;
+                page-break-inside: avoid;
+            }
+
+            .section-title {
+                font-size: 14pt !important;
+                border-bottom: 1pt solid #000 !important;
+                padding-bottom: 3pt !important;
+                margin-bottom: 15pt !important;
+            }
+
+            .parties {
+                gap: 20pt !important;
+                margin-bottom: 20pt !important;
+            }
+
+            .party {
+                border: 1pt solid #000 !important;
+                padding: 15pt !important;
+                page-break-inside: avoid;
+            }
+
+            .party-title {
+                font-size: 12pt !important;
+                margin-bottom: 8pt !important;
+            }
+
+            .party-info {
+                font-size: 11pt !important;
+                line-height: 1.5 !important;
+            }
+
+            .services {
+                background: #f8f8f8 !important;
+                padding: 15pt !important;
+                margin-bottom: 15pt !important;
+                page-break-inside: avoid;
+            }
+
+            .service-selected {
+                border: 2pt solid #000 !important;
+                padding: 15pt !important;
+                background: white !important;
+            }
+
+            .service-selected::before {
+                background: #000 !important;
+                color: white !important;
+                font-size: 8pt !important;
+            }
+
+            .service-title {
+                font-size: 12pt !important;
+            }
+
+            .service-price {
+                font-size: 16pt !important;
+                color: #000 !important;
+            }
+
+            .service-description {
+                font-size: 10pt !important;
+            }
+
+            .terms-list {
+                page-break-inside: avoid;
+            }
+
+            .terms-list li {
+                margin-bottom: 12pt !important;
+                padding-left: 25pt !important;
+                font-size: 11pt !important;
+                page-break-inside: avoid;
+            }
+
+            .terms-list li::before {
+                font-size: 11pt !important;
+            }
+
+            .highlight {
+                background: #f0f0f0 !important;
+                border-left: 3pt solid #000 !important;
+                padding: 10pt !important;
+                margin: 15pt 0 !important;
+                page-break-inside: avoid;
+            }
+
+            .highlight p {
+                font-size: 10pt !important;
+                color: #000 !important;
+            }
+
+            .signature-section {
+                border-top: 1pt solid #000 !important;
+                padding-top: 20pt !important;
+                margin-top: 20pt !important;
+                page-break-before: auto;
+                page-break-inside: avoid;
+            }
+
+            .signatures {
+                gap: 30pt !important;
+                margin-top: 30pt !important;
+            }
+
+            .signature-block {
+                page-break-inside: avoid;
+            }
+
+            .signature-line {
+                border-bottom: 1pt solid #000 !important;
+                height: 60pt !important;
+                margin-bottom: 5pt !important;
+            }
+
+            .signature-image {
+                max-width: 150pt !important;
+                max-height: 50pt !important;
+                display: block !important;
+                margin: 0 auto !important;
+            }
+
+            .signature-info {
+                background: #f0f0f0 !important;
+                border: 1pt solid #000 !important;
+                padding: 5pt !important;
+                margin-top: 5pt !important;
+            }
+
+            .signature-info span {
+                font-size: 8pt !important;
+                color: #000 !important;
+            }
+
+            .signature-placeholder {
+                font-size: 10pt !important;
+                color: #666 !important;
+                padding: 10pt 0 !important;
+            }
+
+            .signature-label {
+                font-size: 10pt !important;
+                margin-bottom: 3pt !important;
+            }
+
+            .signature-name {
+                font-size: 11pt !important;
+            }
+
+            /* Quebras de página estratégicas */
+            .parties {
+                page-break-inside: avoid;
+            }
+
+            .services {
+                page-break-inside: avoid;
+            }
+
+            .terms-list {
+                page-break-inside: auto;
+            }
+
+            .terms-list li:nth-child(5) {
+                page-break-before: auto;
+            }
+
+            .signature-section {
+                page-break-before: auto;
+                min-height: 200pt;
+            }
+
+            /* Garantir que elementos importantes não sejam cortados */
+            h1, h2, h3, .section-title, .party-title {
+                page-break-after: avoid;
+            }
+
+            /* Melhorar a qualidade da impressão */
+            * {
+                -webkit-print-color-adjust: exact !important;
+                color-adjust: exact !important;
+            }
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 20px 16px;
+            }
+
+            .header {
+                padding: 40px 24px 32px;
+            }
+
+            .content {
+                padding: 32px 24px;
+            }
+
+            .parties {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .signatures {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .action-buttons {
+                flex-direction: column;
+                gap: 12px;
+                padding: 20px;
+            }
+
+            .btn {
+                width: 100%;
+                padding: 15px 20px;
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Contrato de Prestação de Serviços</h1>
+            <p>Desenvolvimento de Site de Portfólio</p>
+        </div>
+
+        <div class="content">
+            <div class="contract-status">
+                <h3>✓ CONTRATO ASSINADO</h3>
+                <p>Este contrato foi devidamente preenchido e assinado pelas partes</p>
+            </div>
+
+            <div class="section">
+                <div class="parties">
+                    <div class="party">
+                        <div class="party-title">CONTRATANTE</div>
+                        <div class="party-info">
+                            <strong>Nome:</strong> <span id="clienteNomeView">William Santos Silva</span><br>
+                            <strong>CPF:</strong> <span id="clienteCpfView">123.456.789-00</span><br>
+                            <strong>E-mail:</strong> <span id="clienteEmailView">william.santos@email.com</span><br>
+                            <strong>Telefone:</strong> <span id="clienteTelefoneView">(11) 98765-4321</span><br>
+                            <strong>Endereço:</strong> <span id="clienteEnderecoView">Rua das Flores, 456 - ap 12, Vila Madalena - São Paulo</span>
+                        </div>
+                    </div>
+
+                    <div class="party">
+                        <div class="party-title">CONTRATADO</div>
+                        <div class="party-info">
+                            <strong>Nome:</strong> <span id="prestadorNomeView">Rodrigo R. Giuntini</span><br>
+                            <strong>CPF:</strong> <span id="prestadorCpfView">491.248.858-51</span><br>
+                            <strong>E-mail:</strong> <span id="prestadorEmailView">rodrigorochagiuntini@bityx.app</span><br>
+                            <strong>Telefone:</strong> <span id="prestadorTelefoneView">(11) 99144-9842</span><br>
+                            <strong>Endereço:</strong> <span id="prestadorEnderecoView">Rua Indiana, 217 - ap 62, Brooklin - São Paulo</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">Objeto do Contrato</h2>
+                <div class="services">
+                    <div class="service-selected" id="servicoContratado">
+                        <div class="service-title">Site com Painel de Login</div>
+                        <div class="service-price">R$ 2.500,00</div>
+                        <div class="service-description">
+                            Inclui tudo da versão simples + painel administrativo com login e senha. 
+                            Permite ao cliente cadastrar e editar projetos de forma autônoma. 
+                            Sistema escalável para futuras funcionalidades.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">Termos e Condições</h2>
+                <ol class="terms-list">
+                    <li>
+                        <strong>Prazo de Entrega:</strong> O projeto será entregue em até 15 (quinze) dias corridos 
+                        após aprovação do layout inicial e recebimento da primeira parcela do pagamento.
+                    </li>
+                    
+                    <li>
+                        <strong>Pagamento:</strong> O valor será dividido em duas parcelas:
+                        <br>• 50% na assinatura do contrato (para início do projeto)
+                        <br>• 50% na entrega final do projeto
+                    </li>
+                    
+                    <li>
+                        <strong>Conteúdo:</strong> O contratante se compromete a fornecer todo o conteúdo 
+                        necessário (textos, imagens, vídeos) em até 3 (três) dias após solicitação.
+                    </li>
+                    
+                    <li>
+                        <strong>Revisões:</strong> Estão incluídas até 2 (duas) rodadas de revisão/ajustes. 
+                        Alterações adicionais serão cobradas à parte.
+                    </li>
+                    
+                    <li>
+                        <strong>Hospedagem:</strong> A hospedagem do site NÃO está incluída no valor. 
+                        O contratante deve providenciar domínio e hospedagem próprios.
+                    </li>
+                    
+                    <li>
+                        <strong>Garantia:</strong> O contratado oferece 30 (trinta) dias de garantia 
+                        contra bugs e falhas técnicas após a entrega.
+                    </li>
+                    
+                    <li>
+                        <strong>Propriedade:</strong> Após o pagamento integral, o código fonte 
+                        será de propriedade do contratante.
+                    </li>
+                    
+                    <li>
+                        <strong>Cancelamento:</strong> Em caso de cancelamento pelo contratante, 
+                        os valores pagos não serão devolvidos, mas o trabalho realizado será entregue.
+                    </li>
+                    
+                    <li>
+                        <strong>Atraso na Entrega:</strong> Se o atraso for causado por demora no 
+                        fornecimento de conteúdo pelo contratante, o prazo será prorrogado proporcionalmente.
+                    </li>
+                    
+                    <li>
+                        <strong>Suporte (apenas para versão com painel):</strong> Para a versão com painel 
+                        de login, está incluído suporte técnico básico por 60 (sessenta) dias após a entrega.
+                    </li>
+                </ol>
+            </div>
+
+            <div class="highlight">
+                <p><strong>Importante:</strong> Este contrato tem validade de 30 (trinta) dias após a assinatura. 
+                Se o projeto não for iniciado neste prazo, será necessário renegociar os termos.</p>
+                <p><strong>Comunicação:</strong> Toda comunicação oficial pode ser feita por WhatsApp, 
+                mantendo registro das solicitações e aprovações através das mensagens.</p>
+            </div>
+
+            <div class="signature-section">
+                <div class="section-title">Assinaturas</div>
+                <p style="margin-bottom: 20px; font-size: 0.9rem; color: #666;">
+                    Ao assinar este contrato, ambas as partes concordam com todos os termos descritos acima.
+                </p>
+                
+                <div style="margin-bottom: 20px; font-size: 0.9rem; color: #555;">
+                    <strong>Data:</strong> <span id="dataContratoView">10 / 07 / 2025</span>
+                </div>
+
+                <div class="signatures">
+                    <div class="signature-block">
+                        <div class="signature-line" id="assinaturaClienteView">
+                            <div class="signature-placeholder">Aguardando carregamento...</div>
+                        </div>
+                        <div class="signature-label">Contratante</div>
+                        <div class="signature-name" id="nomeClienteAssinatura">William Santos Silva</div>
+                        <div class="signature-info" id="infoAssinaturaCliente" style="display: none;">
+                            <span>✓ Assinatura Digital Validada</span>
+                        </div>
+                    </div>
+
+                    <div class="signature-block">
+                        <div class="signature-line" id="assinaturaPrestadorView">
+                            <div class="signature-placeholder">Aguardando carregamento...</div>
+                        </div>
+                        <div class="signature-label">Contratado</div>
+                        <div class="signature-name" id="nomePrestadorAssinatura">Rodrigo R. Giuntini</div>
+                        <div class="signature-info" id="infoAssinaturaPrestador" style="display: none;">
+                            <span>✓ Assinatura Digital Validada</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="action-buttons">
+                <button type="button" class="btn btn-success" onclick="window.print()">
+                    🖨️ Imprimir Contrato
+                </button>
+                <button type="button" class="btn btn-secondary" onclick="debugAssinaturas()">
+                    🔍 Debug Assinaturas
+                </button>
+                <button type="button" class="btn btn-secondary" onclick="limparDados()">
+                    🗑️ Limpar Dados
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Função para limpar dados antigos
+        function limparDadosAntigos() {
+            // Se houver dados antigos com formato incorreto, limpar
+            const dados = localStorage.getItem('contratoAssinado');
+            if (dados) {
+                try {
+                    const contrato = JSON.parse(dados);
+                    if (contrato.assinaturas && 
+                        (contrato.assinaturas.cliente === "Assinatura digital capturada" || 
+                         contrato.assinaturas.prestador === "Assinatura digital capturada")) {
+                        console.log('Dados antigos encontrados, limpando...');
+                        localStorage.removeItem('contratoAssinado');
+                        location.reload();
+                    }
+                } catch (e) {
+                    console.error('Erro ao verificar dados:', e);
+                }
+            }
+        }
+
+        // Carregar dados do localStorage se disponível
+        function carregarDadosContrato() {
+            const dados = localStorage.getItem('contratoAssinado');
+            console.log('Dados encontrados:', dados ? 'Sim' : 'Não'); // Para debug
+            
+            if (dados) {
+                const contrato = JSON.parse(dados);
+                console.log('Contrato carregado:', contrato); // Para debug
+                
+                // Preencher dados do cliente
+                if (contrato.cliente) {
+                    const nomeCliente = contrato.cliente.nome || 'William Santos Silva';
+                    document.getElementById('clienteNomeView').textContent = nomeCliente;
+                    document.getElementById('clienteCpfView').textContent = contrato.cliente.cpf || '123.456.789-00';
+                    document.getElementById('clienteEmailView').textContent = contrato.cliente.email || 'william.santos@email.com';
+                    document.getElementById('clienteTelefoneView').textContent = contrato.cliente.telefone || '(11) 98765-4321';
+                    document.getElementById('clienteEnderecoView').textContent = contrato.cliente.endereco || 'Rua das Flores, 456 - ap 12, Vila Madalena - São Paulo';
+                    
+                    // Atualizar nome na assinatura
+                    document.getElementById('nomeClienteAssinatura').textContent = nomeCliente;
+                }
+                
+                // Preencher dados do prestador
+                if (contrato.prestador) {
+                    const nomePrestador = contrato.prestador.nome || 'Rodrigo R. Giuntini';
+                    document.getElementById('prestadorNomeView').textContent = nomePrestador;
+                    document.getElementById('prestadorCpfView').textContent = contrato.prestador.cpf || '491.248.858-51';
+                    document.getElementById('prestadorEmailView').textContent = contrato.prestador.email || 'rodrigorochagiuntini@bityx.app';
+                    document.getElementById('prestadorTelefoneView').textContent = contrato.prestador.telefone || '(11) 99144-9842';
+                    document.getElementById('prestadorEnderecoView').textContent = contrato.prestador.endereco || 'Rua Indiana, 217 - ap 62, Brooklin - São Paulo';
+                    
+                    // Atualizar nome na assinatura
+                    document.getElementById('nomePrestadorAssinatura').textContent = nomePrestador;
+                }
+                
+                // Preencher data
+                if (contrato.data) {
+                    document.getElementById('dataContratoView').textContent = `${contrato.data.dia} / ${contrato.data.mes} / ${contrato.data.ano}`;
+                }
+                
+                // Preencher serviço
+                if (contrato.servico) {
+                    const servicoDiv = document.getElementById('servicoContratado');
+                    if (contrato.servico === 'simples') {
+                        servicoDiv.innerHTML = `
+                            <div class="service-title">Site Profissional Simples</div>
+                            <div class="service-price">R$ 900,00</div>
+                            <div class="service-description">
+                                Layout limpo e profissional, cada projeto com vídeo, imagem, título e descrição. 
+                                Responsivo para todos os dispositivos. Sem painel de administração (atualizações 
+                                devem ser solicitadas ao desenvolvedor).
+                            </div>
+                        `;
+                    }
+                }
+                
+                // Carregar assinaturas
+                if (contrato.assinaturas) {
+                    console.log('Assinaturas encontradas:', contrato.assinaturas); // Para debug
+                    console.log('Chaves das assinaturas:', Object.keys(contrato.assinaturas));
+                    
+                    // Assinatura do cliente
+                    if (contrato.assinaturas.cliente) {
+                        console.log('Tipo de assinatura cliente:', typeof contrato.assinaturas.cliente);
+                        console.log('Tamanho da assinatura cliente:', contrato.assinaturas.cliente.length);
+                        console.log('Começa com data:image?', contrato.assinaturas.cliente.startsWith('data:image'));
+                        
+                        const img = document.createElement('img');
+                        img.src = contrato.assinaturas.cliente;
+                        img.className = 'signature-image';
+                        img.alt = 'Assinatura do Contratante';
+                        img.style.maxWidth = '200px';
+                        img.style.maxHeight = '70px';
+                        img.style.objectFit = 'contain';
+                        img.style.border = 'none';
+                        img.style.background = 'transparent';
+                        
+                        // Adicionar evento para detectar erro de carregamento
+                        img.onerror = function() {
+                            console.error('Erro ao carregar assinatura do cliente');
+                            console.error('Dados da assinatura:', contrato.assinaturas.cliente.substring(0, 100) + '...');
+                            document.getElementById('assinaturaClienteView').innerHTML = 
+                                '<div class="signature-placeholder">❌ Erro ao carregar assinatura</div>';
+                        };
+                        
+                        img.onload = function() {
+                            console.log('✅ Assinatura do cliente carregada com sucesso');
+                        };
+                        
+                        const clienteDiv = document.getElementById('assinaturaClienteView');
+                        clienteDiv.innerHTML = '';
+                        clienteDiv.appendChild(img);
+                        
+                        // Mostrar indicador de validação
+                        document.getElementById('infoAssinaturaCliente').style.display = 'block';
+                    } else {
+                        console.log('❌ Assinatura do cliente não encontrada');
+                        document.getElementById('assinaturaClienteView').innerHTML = 
+                            '<div class="signature-placeholder">❌ Assinatura não encontrada</div>';
+                    }
+                    
+                    // Assinatura do prestador
+                    if (contrato.assinaturas.prestador) {
+                        console.log('Tipo de assinatura prestador:', typeof contrato.assinaturas.prestador);
+                        console.log('Tamanho da assinatura prestador:', contrato.assinaturas.prestador.length);
+                        console.log('Começa com data:image?', contrato.assinaturas.prestador.startsWith('data:image'));
+                        
+                        const img = document.createElement('img');
+                        img.src = contrato.assinaturas.prestador;
+                        img.className = 'signature-image';
+                        img.alt = 'Assinatura do Contratado';
+                        img.style.maxWidth = '200px';
+                        img.style.maxHeight = '70px';
+                        img.style.objectFit = 'contain';
+                        img.style.border = 'none';
+                        img.style.background = 'transparent';
+                        
+                        // Adicionar evento para detectar erro de carregamento
+                        img.onerror = function() {
+                            console.error('Erro ao carregar assinatura do prestador');
+                            console.error('Dados da assinatura:', contrato.assinaturas.prestador.substring(0, 100) + '...');
+                            document.getElementById('assinaturaPrestadorView').innerHTML = 
+                                '<div class="signature-placeholder">❌ Erro ao carregar assinatura</div>';
+                        };
+                        
+                        img.onload = function() {
+                            console.log('✅ Assinatura do prestador carregada com sucesso');
+                        };
+                        
+                        const prestadorDiv = document.getElementById('assinaturaPrestadorView');
+                        prestadorDiv.innerHTML = '';
+                        prestadorDiv.appendChild(img);
+                        
+                        // Mostrar indicador de validação
+                        document.getElementById('infoAssinaturaPrestador').style.display = 'block';
+                    } else {
+                        console.log('❌ Assinatura do prestador não encontrada');
+                        document.getElementById('assinaturaPrestadorView').innerHTML = 
+                            '<div class="signature-placeholder">❌ Assinatura não encontrada</div>';
+                    }
+                } else {
+                    // Caso não haja assinaturas salvas
+                    document.getElementById('assinaturaClienteView').innerHTML = 
+                        '<div class="signature-placeholder">❌ Nenhuma assinatura encontrada</div>';
+                    document.getElementById('assinaturaPrestadorView').innerHTML = 
+                        '<div class="signature-placeholder">❌ Nenhuma assinatura encontrada</div>';
+                }
+            } else {
+                // Caso não haja dados salvos
+                console.log('Nenhum dado encontrado no localStorage');
+                document.getElementById('assinaturaClienteView').innerHTML = 
+                    '<div class="signature-placeholder">⚠️ Dados do contrato não carregados</div>';
+                document.getElementById('assinaturaPrestadorView').innerHTML = 
+                    '<div class="signature-placeholder">⚠️ Dados do contrato não carregados</div>';
+            }
+        }
+        
+
+        
+        // Função para debug das assinaturas
+        function debugAssinaturas() {
+            const dados = localStorage.getItem('contratoAssinado');
+            if (dados) {
+                const contrato = JSON.parse(dados);
+                console.log('=== DEBUG ASSINATURAS ===');
+                console.log('Contrato completo:', contrato);
+                
+                if (contrato.assinaturas) {
+                    console.log('Assinaturas encontradas:', contrato.assinaturas);
+                    console.log('Chaves:', Object.keys(contrato.assinaturas));
+                    
+                    if (contrato.assinaturas.cliente) {
+                        console.log('Cliente - Tipo:', typeof contrato.assinaturas.cliente);
+                        console.log('Cliente - Tamanho:', contrato.assinaturas.cliente.length);
+                        console.log('Cliente - Primeira parte:', contrato.assinaturas.cliente.substring(0, 50));
+                    }
+                    
+                    if (contrato.assinaturas.prestador) {
+                        console.log('Prestador - Tipo:', typeof contrato.assinaturas.prestador);
+                        console.log('Prestador - Tamanho:', contrato.assinaturas.prestador.length);
+                        console.log('Prestador - Primeira parte:', contrato.assinaturas.prestador.substring(0, 50));
+                    }
+                } else {
+                    console.log('Nenhuma assinatura encontrada');
+                }
+                
+                alert('Informações no console do navegador (F12)');
+            } else {
+                alert('Nenhum dado encontrado no localStorage');
+            }
+        }
+
+        // Função para limpar dados
+        function limparDados() {
+            if (confirm('Tem certeza que deseja limpar todos os dados salvos?')) {
+                localStorage.removeItem('contratoAssinado');
+                alert('Dados limpos! Recarregando página...');
+                location.reload();
+            }
+        }
+
+        // Carregar dados ao carregar a página
+        window.addEventListener('load', function() {
+            limparDadosAntigos();
+            carregarDadosContrato();
+        });
+    </script>
+</body>
+</html> 
